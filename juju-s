@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$1" == "--description" ]; then
+  echo "Juju status without relations with potential filters"
+  exit 0
+elif [ "$1" == "--help" ]; then
+  echo "juju s (status filters)"
+  echo ""
+  echo "Juju Status output without relations"
+  exit 0
+fi
+
+juju status "${@:1}" --color | grep -Pzo '(?s)Unit.*?(?=Relation)'
